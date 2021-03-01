@@ -1,8 +1,10 @@
 <template>
   <div v-for="(value, index) in 16" class="cellWithResult">
-    <div v-if="weekIsEmpty(weeks[index])" />
+    <div v-if="weekIsEmpty(weeks[index])">
+      .
+    </div>
     <div v-else :class="[cssClass(weeks[index].diff)]">
-      {{weeks[index].rank}} 
+      {{ weeks[index].rank }}
     </div>
   </div>
 </template>

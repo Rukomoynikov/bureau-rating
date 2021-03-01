@@ -4,10 +4,10 @@
 
     <WeeksLine />
 
-    <div v-for="weekNumber in weekNumbers" class="week">
+    <div v-for="(weekNumber, index) in weekNumbers" :key="index" class="week">
       <h2>Неделя {{weekNumber}}</h2>
 
-      <div v-for="student in weeks[weekNumber]" class="student">
+      <div v-for="(student, studentIndex) in weeks[weekNumber]" :key="studentIndex" class="student">
         <StudentWeeks :weeks="student.weeks" />
         <StudentSummary :student="student" />
       </div>
@@ -17,7 +17,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import axios from 'axios'
 import StudentSummary from './StudentSummary.vue'
 import StudentWeeks from './StudentWeeks.vue'
 import WeeksLine from './WeeksLine.vue'
@@ -25,30 +24,9 @@ import WeeksLine from './WeeksLine.vue'
 export default defineComponent({
   name: 'Container',
   components: { StudentSummary, StudentWeeks, WeeksLine },
-  data() {
-    return {
-      students: [],
-      weeks: []
-    }
-  },
-  async mounted() {
-    const response = await axios.get('https://bureau.ru/classroom/events/1565/reports/race.json')
-
-    const weeks = {}
-
-
-    // Сортировка студентов по неделям. 
-    // На основании количества пройденных недель.
-    for(let i = 16; i >= 0; i--) {
-      const result = response
-        .data
-        .filter(student => student.weeks.length == i)
-
-      if(result.length) { weeks[i] = result }
-    }
-  
-    this.students = response.data
-    this.weeks = weeks
+  props: {
+    students: Array,
+    weeks: Array
   },
   computed: {
     weekNumbers() {
