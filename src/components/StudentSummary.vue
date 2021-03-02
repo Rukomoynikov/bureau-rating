@@ -1,8 +1,8 @@
 <template>
   <div>
-  	{{student.name}}
+  	{{student.name}} {{ Math.floor(student.totalScore) }}
   	<br>
-  	<span>{{student.job}}, {{student.city}}</span>
+  	<span>{{student.job}}, {{student.city}} </span>
   </div>
 </template>
 

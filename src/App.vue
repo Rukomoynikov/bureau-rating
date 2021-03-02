@@ -25,11 +25,17 @@ export default defineComponent({
   async mounted() {
     const response = await axios.get('https://bureau.ru/classroom/events/1565/reports/race.json')
     // https://bureau.ru/classroom/events/1589/reports/race.json
-    const data = response.data.map(function (student) {
+
+    // Подсчет общего рейтинга для студентов
+    let data = response.data.map(function (student) {
       student.totalScore = student.weeks.reduce(function(accumulator, week) {
         return accumulator + week.score
       }, 0)
       return student
+    })
+
+    data = data.sort(function(studentPrev, studentNext) {
+      return studentPrev.totalScore - studentNext.totalScore
     })
 
     const weeks = {}
