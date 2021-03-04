@@ -2,15 +2,15 @@
   <div>
     <h1>Студенты тринадцатого потока</h1>
     <Header v-model:selectedChart="selectedChart" />
-    <WeeksHeader />
-    <WeeklyRating :weeks="weeks" :students="students" />
+    <WeeklyRating v-if="selectedChart == 'weekly'" :weeks="weeks" :students="students" />
+    <OverallRating v-if="selectedChart == 'all'" :weeks="weeks" :students="students" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import WeeksHeader from './WeeksHeader.vue'
 import Header from './Header.vue'
+import OverallRating from './OverallRating.vue'
 import WeeklyRating from './WeeklyRating.vue'
 
 export default defineComponent({
@@ -19,7 +19,7 @@ export default defineComponent({
       selectedChart: "weekly"
     }
   },
-  components: { WeeksHeader, Header, WeeklyRating },
+  components: { Header, WeeklyRating, OverallRating},
   props: {
     students: Array,
     weeks: Object

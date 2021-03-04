@@ -1,4 +1,6 @@
 <template>
+  <WeeksHeader />
+
   <div 
     v-for="(weekNumber, index) in weekNumbers" 
     :key="weekNumber" class="container">
@@ -6,20 +8,21 @@
     <div class="weekLabel">Неделя {{weekNumber}}</div>
 
     <div v-for="(student, studentIndex) in weeks[weekNumber]" :key="studentIndex" class="student">
-      <StudentWeeks :weeks="student.weeks" />
+      <StudentWeek :weeks="student.weeks" />
       <StudentSummary :student="student" :studentIndex="studentIndex" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import WeeksHeader from './WeeksHeader.vue'
 import StudentSummary from './StudentSummary.vue'
-import StudentWeeks from './StudentWeeks.vue'
+import StudentWeek from './StudentWeek.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'WeeklyRating',
-  components: { StudentSummary, StudentWeeks },
+  components: { StudentSummary, StudentWeek, WeeksHeader },
   computed: {
     weekNumbers() {
       return Object.keys(this.weeks).reverse()
@@ -33,15 +36,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.cellWithResult {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding-left: 5px;
-  position: relative;
-}
-
 .container {
   margin-top: 20px;
 }
@@ -49,6 +43,7 @@ export default defineComponent({
 .student {
   display: flex;
   margin-bottom: 8px;
+  flex-wrap: wrap;
 }
 
 .student:hover {

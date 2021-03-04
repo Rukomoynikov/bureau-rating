@@ -2,14 +2,15 @@
   <h2>
     Показать студентов
     <form class="chartSelector">
-      <label><input 
+      <label><input
+        type="radio" 
+        @change="update($event)" 
+        :checked="selectedChart" value="all" 
+        name="chartSelector">все вместе</label>
+      <label><input
         type="radio" @change="update($event)" 
         :checked="selectedChart" value="weekly" 
         name="chartSelector">по неделям</label>
-      <label><input 
-        type="radio" @change="update($event)" 
-        :checked="selectedChart" value="all" 
-        name="chartSelector">все вместе</label>
     </form>
   </h2>
 </template>
@@ -24,8 +25,7 @@ export default defineComponent({
   },
   methods: {
     update(event) {
-      console.log(event.target.value)
-      this.$emit('update:modelValue', event.target.value)
+      this.$emit('update:selectedChart', event.target.value)
     }
   }
 })

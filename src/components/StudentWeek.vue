@@ -1,14 +1,16 @@
 <template>
-  <div v-for="(value, index) in 16" class="cellWithResult">
-    <div v-if="weekIsEmpty(weeks[index])">
-      .
-    </div>
-    <div v-else :class="[cssClass(weeks[index].diff)]">
-      {{ weeks[index].rank }}
+  <div class="StudentWeek">
+    <div v-for="(value, index) in 16" class="cellWithResult">
+      <div v-if="weekIsEmpty(weeks[index])">
+        .
+      </div>
+      <div v-else :class="[cssClass(weeks[index].diff)]">
+        {{ weeks[index].rank }}
 
-      <!-- <div class="goldMedals">
-        <GoldMedals :courses="weeks[index].details" />
-      </div> -->
+        <!-- <div class="goldMedals">
+          <GoldMedals :courses="weeks[index].details" />
+        </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -43,6 +45,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.StudentWeek {
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .StudentWeek {
+    order: 2;
+  }
+}
+
 .cellWithResult {
   width: 40px;
   height: 40px;
