@@ -1,20 +1,19 @@
+<!-- Входная точка приложения. Содержит:
+- глобальные стили -->
 <template>
-  <Container 
-    :students="students"
-
-    :weeks="weeks" />
+  <Page :students="students" :weeks="weeks" />
 </template>
 
 <script lang="ts">
 import './assets/fonts/raleway/stylesheet.css'
 import { defineComponent } from 'vue'
-import Container from './components/Container.vue'
+import Page from './components/Page.vue'
 import axios from 'axios'
 
 export default defineComponent({
   name: 'App',
   components: {
-    Container
+    Page
   },
   data () {
     return {
@@ -28,14 +27,15 @@ export default defineComponent({
 
     // Подсчет общего рейтинга для студентов
     let data = response.data.map(function (student) {
-      student.totalScore = student.weeks.reduce(function(accumulator, week) {
-        return accumulator + week.score
-      }, 0)
+      // student.totalScore = student.weeks.reduce(function(accumulator, week) {
+      //   return accumulator + week.score
+      // }, 0)
+      student.totalScore = student.weeks[student.weeks.length - 1].score
       return student
     })
 
     data = data.sort(function(studentPrev, studentNext) {
-      return studentPrev.totalScore - studentNext.totalScore
+      return studentNext.totalScore - studentPrev.totalScore
     })
 
     const weeks = {}
@@ -49,19 +49,27 @@ export default defineComponent({
       if(result.length) { weeks[i] = result }
     }
   
-    this.students = response.data
+    this.students = data
     this.weeks = weeks
   },
 })
 </script>
 
 <style>
+html, body {
+  margin: 0px;
+  padding: 0px;
+  background: #fce6d5;
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 20px;
+  padding-top: 20px;
+  padding-left: 10px;
   font-family: "Raleway";
+  background: #fce6d5;
 }
 
 @font-face {

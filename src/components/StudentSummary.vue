@@ -1,8 +1,16 @@
+<!-- Описание студента для правой колонки списка. -->
+
 <template>
-  <div>
-  	{{student.name}} {{ Math.floor(student.totalScore) }}
+  <div v-if="isCanceled" class="cancelled">
+    {{studentIndex + 1}} {{student.name}} {{ Math.floor(student.totalScore) }}
+    <br>
+    <span><span class="hidden">{{studentIndex + 1}}&nbsp;</span>{{student.job}}, {{student.city}} </span>
+  </div>
+
+  <div v-else>
+  	{{studentIndex + 1}} {{student.name}} {{ Math.floor(student.totalScore) }}
   	<br>
-  	<span>{{student.job}}, {{student.city}} </span>
+  	<span><span class="hidden">{{studentIndex + 1}}&nbsp;</span>{{student.job}}, {{student.city}} </span>
   </div>
 </template>
 
@@ -12,20 +20,33 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'StudentSummary',
   props: {
-  	student: Object
+  	student: Object,
+    studentIndex: Number
   },
   computed: {
     description() {
-       if(student.job && student.city) {
-       	return `${student.job}, ${student.city}`
+       if(this.student.job && this.student.city) {
+       	return `${this.student.job}, ${this.student.city}`
        }
 
-       return `${student.job}${student.city}`
-  	}
+       return `${this.student.job}${this.student.city}`
+  	},
+    isCanceled() {
+      return this.student.enrollment_status == "cancelled"
+        || this.student.enrollment_status == "paused"
+        || this.student.enrollment_status == "failed" 
+    }
   }
 })
 </script>
 
 <style scoped>
+.cancelled {
+  color: grey;
+  text-decoration: line-through;
+}
 
+.hidden {
+  visibility: hidden;
+}
 </style>
