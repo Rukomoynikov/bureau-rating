@@ -1,19 +1,18 @@
 <template>
-  <div>
-    Общий рейтинг
-    <div class="header">
-      <div class="row">#</div>
-      <div class="row">студент</div>
-      <div class="row">неделя</div>
-      <div class="row">рейтинг</div>
-    </div>
+  <div class="table">
+    <div class="body table__body">
+      <div class="table__row">
+        <div class="row table__cell">#</div>
+        <div class="row table__cell">студент</div>
+        <div class="row table__cell">неделя</div>
+        <div class="row table__cell">рейтинг</div>
+      </div>
 
-    <div class="body">
-      <div v-for="(student, i) in activeStudents" class="flex">
-        <div class="row">{{ i }}</div>
-        <div class="row">{{ student.name }}</div>
-        <div class="row">{{ student.weeks.length }}</div>
-        <div class="row">{{ Math.floor(student.totalScore) }}</div>
+      <div v-for="(student, i) in activeStudents" class="flex table__row">
+        <div class="row table__cell">{{ i }}</div>
+        <div class="row table__cell">{{ student.name }}</div>
+        <div class="row table__cell">{{ student.weeks.length }}</div>
+        <div class="row table__cell">{{ Math.floor(student.totalScore) }}</div>
       </div>
     </div>
   </div>
@@ -52,4 +51,9 @@ export default defineComponent({
 .row {
   padding: 5px 10px;
 }
+
+.table { display: table; }
+.table__body {}
+.table__row { display: table-row; }
+.table__cell { display: table-cell; }
 </style>

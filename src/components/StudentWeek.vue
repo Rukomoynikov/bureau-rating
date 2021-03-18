@@ -49,7 +49,7 @@ export default defineComponent({
   display: flex;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 640px) {
   .StudentWeek {
     order: 2;
   }

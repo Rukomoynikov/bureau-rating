@@ -1,16 +1,17 @@
 <template>
   <h2>
-    Показать студентов
+    Показать 
     <form class="chartSelector">
       <label><input
-        type="radio" 
+        type="radio"
         @change="update($event)" 
-        :checked="selectedChart" value="all" 
-        name="chartSelector">все вместе</label>
-      <label><input
-        type="radio" @change="update($event)" 
-        :checked="selectedChart" value="weekly" 
+        v-model="localSelectedChart" value="weekly"
         name="chartSelector">по неделям</label>
+      <label><input
+        type="radio"
+        @change="update($event)" 
+        v-model="localSelectedChart" value="all"
+        name="chartSelector">все вместе</label>
     </form>
   </h2>
 </template>
@@ -20,12 +21,25 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Header',
+  data() {
+    return {
+      localSelectedChart: null
+    }
+  },
   props: {
     selectedChart: String
   },
   methods: {
     update(event) {
       this.$emit('update:selectedChart', event.target.value)
+    }
+  },
+  mounted() {
+    this.localSelectedChart = this.selectedChart
+  },
+  watch: {
+    selectedChart(newValue, oldValue) {
+      this.localSelectedChart = newValue
     }
   }
 })

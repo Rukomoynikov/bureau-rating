@@ -43,7 +43,12 @@ export default defineComponent({
 .student {
   display: flex;
   margin-bottom: 8px;
-  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 640px) {
+  .student {
+    flex-wrap: wrap;
+  }
 }
 
 .student:hover {

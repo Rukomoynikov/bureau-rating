@@ -43,7 +43,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 640px) {
   .StudentSummary {
     order: 1;
   }

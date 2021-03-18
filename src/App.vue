@@ -62,6 +62,10 @@ html, body {
   background: #fce6d5;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
