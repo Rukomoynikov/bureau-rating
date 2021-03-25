@@ -5,12 +5,6 @@
         .
       </div>
       <div v-else :class="[cssClass(weeks[index].diff)]">
-
-        {{ weeks[index].rank }}
-
-        <!-- <div class="goldMedals">
-          <GoldMedals :courses="weeks[index].details" />
-        </div> -->
       </div>
     </div>
   </div>
@@ -21,7 +15,7 @@ import { defineComponent } from 'vue'
 import GoldMedals from './GoldMedals.vue'
 
 export default defineComponent({
-  name: 'StudentWeeks',
+  name: 'StudentWeeksLine',
   components: {GoldMedals},
   props: {
     weeks: Array
