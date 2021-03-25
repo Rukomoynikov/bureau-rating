@@ -46,6 +46,7 @@ export interface Week {
   details: Detail[];
   rank:    number;
   diff:    number;
+  weekSummScore: number
 }
 
 export interface Detail {

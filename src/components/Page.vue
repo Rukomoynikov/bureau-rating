@@ -13,6 +13,7 @@ import Header from './Header.vue'
 import OverallRating from './OverallRating/OverallRating.vue'
 import WeeklyRating from './WeeklyRating/WeeklyRating.vue'
 import {useStudents} from "../composable/useStudents";
+import {useWeeksAverage} from "../composable/useWeeksAverage";
 
 export default defineComponent({
   data () {
@@ -26,9 +27,10 @@ export default defineComponent({
     weeks: Object
   },
   setup (props) {
-    const {students, weeks } = useStudents()
+    const {students, weeks} = useStudents()
+    const weeksAverage = useWeeksAverage(students)
 
-    return { students, weeks }
+    return { students, weeks, weeksAverage }
   }
 })
 </script>

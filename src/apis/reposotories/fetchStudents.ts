@@ -6,10 +6,21 @@ export async function fetchStudents () {
   const response = await axios.get('https://bureau.ru/classroom/events/1565/reports/race.json')
   // https://bureau.ru/classroom/events/1589/reports/race.json
 
-  // Подсчет общего рейтинга для каждого студента
   let data: StudentWithAddings[] = response.data
     .map((student: Student) => {
-      return { ...student, totalScore: student.weeks[student.weeks.length - 1].score }
+      const weeks = student.weeks.map((week, index) => {
+        // Вычисление общего бала за неделю
+        const weekSummScore =  week.details
+          .map(subject => subject.score)
+          .reduce((previousValue, currentValue) => { return previousValue + Math.round(currentValue)}, 0)
+
+        return { ...week, weekSummScore: weekSummScore}
+      })
+
+      return { ...student,
+        weeks,
+        totalScore: student.weeks[student.weeks.length - 1].score // Последняя неделя содержит общее количество очков
+      }
     })
     .sort(function(studentPrev: StudentWithAddings, studentNext: StudentWithAddings) {
       return studentNext.totalScore - studentPrev.totalScore

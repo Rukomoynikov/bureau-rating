@@ -1,5 +1,5 @@
 <template>
-  <h2>
+  <p class="chartSelector__container">
     Показать рейтинг
     <form class="chartSelector">
       <label><input
@@ -13,7 +13,7 @@
         v-model="localSelectedChart" value="all"
         name="chartSelector">все вместе</label>
     </form>
-  </h2>
+  </p>
 </template>
 
 <script lang="ts">
@@ -57,6 +57,10 @@ export default defineComponent({
 
 .chartSelector label {
   margin-left: 9px;
+}
+
+.chartSelector__container {
+  padding-bottom: 5px;
 }
 </style>
 

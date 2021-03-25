@@ -5,7 +5,8 @@
         .
       </div>
       <div v-else :class="[cssClass(weeks[index].diff)]">
-        {{ weeks[index].rank }}
+
+        {{ weeks[index].weekSummScore }}
 
         <!-- <div class="goldMedals">
           <GoldMedals :courses="weeks[index].details" />
