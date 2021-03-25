@@ -8,7 +8,6 @@
 import './assets/fonts/raleway/stylesheet.css'
 import { defineComponent } from 'vue'
 import Page from './components/Page.vue'
-import axios from 'axios'
 
 export default defineComponent({
   name: 'App',
@@ -22,35 +21,7 @@ export default defineComponent({
     }
   },
   async mounted() {
-    const response = await axios.get('https://bureau.ru/classroom/events/1565/reports/race.json')
-    // https://bureau.ru/classroom/events/1589/reports/race.json
 
-    // Подсчет общего рейтинга для студентов
-    let data = response.data.map(function (student) {
-      // student.totalScore = student.weeks.reduce(function(accumulator, week) {
-      //   return accumulator + week.score
-      // }, 0)
-      student.totalScore = student.weeks[student.weeks.length - 1].score
-      return student
-    })
-
-    data = data.sort(function(studentPrev, studentNext) {
-      return studentNext.totalScore - studentPrev.totalScore
-    })
-
-    const weeks = {}
-
-    // Сортировка студентов по неделям. 
-    // На основании количества пройденных недель.
-    for(let i = 16; i >= 0; i--) {
-      var result = data
-        .filter(student => student.weeks.length == i)
-
-      if(result.length) { weeks[i] = result }
-    }
-  
-    this.students = data
-    this.weeks = weeks
   },
 })
 </script>
