@@ -8,12 +8,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import Header from './Header.vue'
 import OverallRating from './OverallRating/OverallRating.vue'
 import WeeklyRating from './WeeklyRating/WeeklyRating.vue'
-import {fetchStudents} from "../apis/reposotories/fetchStudents";
-import {StudentWithAddings} from "../types/api";
+import {useStudents} from "../composable/useStudents";
 
 export default defineComponent({
   data () {
@@ -27,21 +26,9 @@ export default defineComponent({
     weeks: Object
   },
   setup (props) {
-    const students = ref<StudentWithAddings[]>([])
-    const weeks = ref<{ [key: number]: StudentWithAddings[] }>({})
+    const {students, weeks } = useStudents()
 
-    const getStudents = async () => {
-      let response = await fetchStudents()
-      students.value = response.students
-      weeks.value = response.weeks
-    }
-
-    onMounted(getStudents)
-
-    return {
-      weeks,
-      students
-    }
+    return { students, weeks }
   }
 })
 </script>
