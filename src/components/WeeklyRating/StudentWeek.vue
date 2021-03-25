@@ -59,7 +59,7 @@ export default defineComponent({
   width: 40px;
   height: 40px;
   display: flex;
-  align-items: center;
+
   padding-left: 5px;
   position: relative;
 }

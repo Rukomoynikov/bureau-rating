@@ -1,6 +1,6 @@
 <template>
   <h2>
-    Показать 
+    Показать рейтинг
     <form class="chartSelector">
       <label><input
         type="radio"

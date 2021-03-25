@@ -10,8 +10,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Header from './Header.vue'
-import OverallRating from './OverallRating.vue'
-import WeeklyRating from './WeeklyRating.vue'
+import OverallRating from './OverallRating/OverallRating.vue'
+import WeeklyRating from './WeeklyRating/WeeklyRating.vue'
 
 export default defineComponent({
   data () {

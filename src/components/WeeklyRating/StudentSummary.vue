@@ -2,13 +2,7 @@
 
 <template>
   <div class="StudentSummary">
-    <div v-if="isCanceled" class="cancelled">
-      {{studentIndex + 1}} {{student.name}} {{ Math.floor(student.totalScore) }}
-      <br>
-      <span><span class="hidden">{{studentIndex + 1}}&nbsp;</span>{{student.job}}, {{student.city}} </span>
-    </div>
-
-    <div v-else>
+    <div :class="{ 'cancelled': isCanceled }">
       {{studentIndex + 1}} {{student.name}} {{ Math.floor(student.totalScore) }}
       <br>
       <span><span class="hidden">{{studentIndex + 1}}&nbsp;</span>{{student.job}}, {{student.city}} </span>
