@@ -2,17 +2,17 @@
   <div class="table">
     <div class="body table__body">
       <div class="table__row">
-        <div class="row table__cell">#</div>
-        <div class="row table__cell">студент</div>
-        <div class="row table__cell">неделя</div>
-        <div class="row table__cell">рейтинг</div>
+        <div class="table__cell table__header">Место</div>
+        <div class="table__cell table__header">Студент</div>
+        <div class="table__cell table__header">Неделя</div>
+        <div class="table__cell table__header">Рейтинг</div>
       </div>
 
       <div v-for="(student, i) in activeStudents" class="flex table__row">
-        <div class="row table__cell">{{ i }}</div>
-        <div class="row table__cell">{{ student.name }}</div>
-        <div class="row table__cell">{{ student.weeks.length }}</div>
-        <div class="row table__cell">{{ Math.floor(student.totalScore) }}</div>
+        <div class="table__cell">{{ i + 1 }}</div>
+        <div class="table__cell">{{ student.name }}</div>
+        <div class="table__cell">{{ student.weeks.length }}</div>
+        <div class="table__cell">{{ Math.floor(student.totalScore) }}</div>
       </div>
     </div>
   </div>
@@ -29,10 +29,8 @@ export default defineComponent({
   },
   computed: {
     activeStudents() {
-      return this.students.filter(function(student) {
-        return student.enrollment_status != "cancelled"
-        || student.enrollment_status != "paused"
-        || student.enrollment_status != "failed" 
+      return this.students.filter((student) => {
+        return ["cancelled", "paused", "failed"].indexOf(student.enrollment_status) == -1
       })
     }
   }
@@ -48,12 +46,20 @@ export default defineComponent({
   display: flex;
 }
 
-.row {
+.table { display: table; }
+
+.table__body {}
+
+.table__row { display: table-row; }
+
+.table__cell { 
   padding: 5px 10px;
+  display: table-cell; 
 }
 
-.table { display: table; }
-.table__body {}
-.table__row { display: table-row; }
-.table__cell { display: table-cell; }
+.table__cell:first-child {
+  padding-left: 0px;
+}
+
+.table__header { font-weight: bold; }
 </style>
